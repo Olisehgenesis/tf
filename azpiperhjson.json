@@ -1,0 +1,73 @@
+{
+   "trigger": {
+      "branches": {
+         "include": [
+            "*"
+         ]
+      },
+      "paths": {
+         "include": [
+            "/"
+         ]
+      }
+   },
+   "variables": {
+      "serviceConnection": "dev/test",
+      "azureLocation": "us-west-3",
+      "terraformWorkingDirectory": "$(System.DefaultWorkingDirectory)",
+      "terraformVersion": "latest"
+   },
+   "stages": [
+      {
+         "stage": "TerraformContinuousIntegration",
+         "displayName": "Terraform Module - CI",
+         "jobs": [
+            {
+               "job": "TerraformContinuousIntegrationJob",
+               "displayName": "TerraformContinuousIntegration - CI Job",
+               "pool": {
+                  "vmImage": "ubuntu-20.04"
+               },
+               "steps": [
+                  {
+                     "bash": "pip3 install checkov",
+                     "displayName": "Install checkov",
+                     "name": "install_checkov"
+                  },
+                  {
+                     "task": "TerraformCLI@0",
+                     "displayName": "Run terraform init",
+                     "inputs": {
+                        "command": "init",
+                        "workingDirectory": "$(terraformWorkingDirectory)/dev"
+                     }
+                  },
+                  {
+                     "task": "TerraformCLI@0",
+                     "displayName": "Run terraform validate",
+                     "inputs": {
+                        "command": "validate",
+                        "workingDirectory": "$(terraformWorkingDirectory)/dev"
+                     }
+                  },
+                  {
+                     "bash": "checkov --directory $(System.DefaultWorkingDirectory)/dev",
+                     "displayName": "Verify modules with Checkov",
+                     "name": "checkov_module_check"
+                  },
+                  {
+                     "task": "TerraformCLI@0",
+                     "displayName": "Run terraform plan",
+                     "inputs": {
+                        "command": "plan",
+                        "workingDirectory": "$(terraformWorkingDirectory)",
+                        "environmentServiceName": "$(serviceConnection)",
+                        "commandOptions": "-var location=$(azureLocation)"
+                     }
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
