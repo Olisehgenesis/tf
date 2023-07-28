@@ -1,5 +1,8 @@
 # Configure the Azure provider
 
+provider "azurerm" {
+  features {}
+}
 
 data "azurerm_resource_group" "CORP-LE-NafNet-RG" {
   name = "CORP-LE-NafNet-RG"
@@ -29,7 +32,7 @@ module "app_service_plan" {
 }
 
 module "app_service" {
-source =  "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/app_service.tf"
+  source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/app_service.tf"
 }
 
 module "static_web_app" {
@@ -50,4 +53,3 @@ module "storage_account" {
 
 # Add any additional configuration or considerations here
 # if they are not covered by separate modules.
-
