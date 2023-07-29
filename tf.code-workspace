@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../modules"
+		},
+		{
+			"path": "../Cloud Architecture Templates"
 		}
 	],
 	"settings": {}

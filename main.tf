@@ -1,4 +1,3 @@
-
 data "azurerm_resource_group" "CORP-LE-NafNet-RG" {
   name = "CORP-LE-NafNet-RG"
 }
@@ -12,48 +11,39 @@ variable "resource_type_abbreviation" {}
 variable "location" {}
 variable "tag_owner" {}
 variable "tag_department" {}
+variable "private_endpoint_enabled" {}
+variable "private_endpoint_subnet_id" {}
 
 # Include other configuration files for resources
 module "log_analytics" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/log_analytics.tf"
+  source = "github.com/Olisehgenesis/modules//log_analytics"
 }
 
 module "application_insights" {
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/application_insights.tf"
-  source = "github.com/Olisehgenesis/modules"
+  source = "github.com/Olisehgenesis/modules//application_insights"
 }
 
 module "app_service_plan" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/app_service_plan.tf&version=GBmain"
-  
+  source = "github.com/Olisehgenesis/modules//app_service_plan"
 }
 
 module "app_service" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/app_service.tf"
+  source = "github.com/Olisehgenesis/modules//app_service"
+  operating_system = "Windows"  # Replace with the appropriate operating system value
 }
 
 module "static_web_app" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/static_app.tf"
+  source = "github.com/Olisehgenesis/modules//static_web_app"
 }
 
 module "static_app" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/static_web_app.tf"
+  source = "github.com/Olisehgenesis/modules//static_app"
 }
 
 module "key_vault" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/key_vault.tf"
+  source = "github.com/Olisehgenesis/modules//key_vault"
 }
 
 module "storage_account" {
-  source = "github.com/Olisehgenesis/modules"
-  #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/storage_account.tf"
+  source = "github.com/Olisehgenesis/modules//storage_account"
 }
-
-# Add any additional configuration or considerations here
-# if they are not covered by separate modules.
