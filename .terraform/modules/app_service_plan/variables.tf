@@ -1,10 +1,12 @@
 variable "department_abbreviation" {
-  type        = corp
+  type        = string
+  default = "corp"
   description = "Two-letter abbreviation for the department."
 }
 
 variable "major_environment" {
-  type        = le
+  type        = string
+  default = "le"
   description = "Major environment (e.g., LE, Prod)."
 }
 

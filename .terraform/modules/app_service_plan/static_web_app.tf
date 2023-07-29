@@ -2,7 +2,7 @@
 
 variable "resource_type_abbreviation" {
   type = string
-  default = SWA
+  default = "SWA"
 }
 
 variable "location" {
