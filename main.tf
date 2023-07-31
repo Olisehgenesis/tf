@@ -16,34 +16,34 @@ variable "private_endpoint_subnet_id" {}
 
 # Include other configuration files for resources
 module "log_analytics" {
-  source = "github.com/Olisehgenesis/modules//log_analytics"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//log_analytics"
 }
 
 module "application_insights" {
-  source = "github.com/Olisehgenesis/modules//application_insights"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//application_insights"
 }
 
 module "app_service_plan" {
-  source = "github.com/Olisehgenesis/modules//app_service_plan"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//app_service_plan"
 }
 
 module "app_service" {
-  source = "github.com/Olisehgenesis/modules//app_service"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//app_service"
   operating_system = "Windows"  # Replace with the appropriate operating system value
 }
 
 module "static_web_app" {
-  source = "github.com/Olisehgenesis/modules//static_web_app"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//static_web_app"
 }
 
 module "static_app" {
-  source = "github.com/Olisehgenesis/modules//static_app"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//static_app"
 }
 
 module "key_vault" {
-  source = "github.com/Olisehgenesis/modules//key_vault"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//key_vault"
 }
 
 module "storage_account" {
-  source = "github.com/Olisehgenesis/modules//storage_account"
+  source = "git::https://dev.azure.com/oliseh/Azure%20Help/_git/Modules//storage_account"
 }
